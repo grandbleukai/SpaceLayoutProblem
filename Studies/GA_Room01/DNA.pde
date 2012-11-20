@@ -1,16 +1,42 @@
 class DNA {
-  float genes;
+  // The genetic sequence
+  // set PVector x as room xPos, y as yPos, z as room type
+  PVector[] genes;
   float fitness;
+  int[] roomType;
   
-  DNA(int num) {
-    genes = new float[num];
+  // Constructor ( makes a random DNA)
+  // num = Number of genes (= room number)
+  // roomType.length = Room Number
+  DNA(int[] roomType) {
+    this.roomType = roomType;
+    genes = new PVector[roomType.length];
     for (int i = 0; i<genes.length; i++){
-      genes[i] = float(1);
+      genes[i].set(random(0,1),random(0,1),roomType[i]);
     }
   }
   
   void fitness () {
-   }
+
+  }
+
+  int calcGridValue(){
+    for (int i = 0; i<this.roomValue().length; i++){
+      for (int j = 0; j<this.roomValue()[i].length; j++){
+        gridValue[this.x+i][this.y+j] += this.roomValue[i][j];
+      }
+    }
+  }
+
+  // Define room type
+  int[][] roomValue(){
+    for (int i = 0; i<room.length; i++){
+      if (this.genes[i].z = 0){
+        roomValue num[][] = {{1, 3, 5}, {2, 4, 6}};
+      }
+      return roomValue;
+    }
+  }
   
   // Crossover
   DNA crossover(DNA partner) {

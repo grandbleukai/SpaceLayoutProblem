@@ -1,31 +1,33 @@
-PFont f;
-String target;
+// grid horizontal number and vertical number
+int xNumber, yNumber;
+
 int popmax;
 float mutationRate;
-Population population;
+int roomNumber;
+int[] roomType;
+
 
 void setup() {
   size(600, 200);
-  f = createFont("Courier", 32, true);
-  target = "To be or not to be.";
   popmax = 150;
   mutationRate = 0.01;
 
-  // Create a populationation with a target phrase, mutation rate, and populationation max
-  population = new Population(target, mutationRate, popmax);
+  // Create a roomation with a target phrase, mutation rate, and roomation max
+  room = new Room(target, mutationRate, popmax);
+  room = new Room(width, height,1)
 }
 
 void draw() {
   // Generate mating pool
-  population.naturalSelection();
+  room.naturalSelection();
   //Create next generation
-  population.generate();
+  room.generate();
   // Calculate fitness
-  population.calcFitness();
+  room.calcFitness();
   displayInfo();
 
   // If we found the target phrase, stop
-  if (population.finished()) {
+  if (room.finished()) {
     println(millis()/1000.0);
     noLoop();
   }
@@ -33,8 +35,8 @@ void draw() {
 
 void displayInfo() {
   background(255);
-  // Display current status of populationation
-  String answer = population.getBest();
+  // Display current status of roomation
+  String answer = room.getBest();
   textFont(f);
   textAlign(LEFT);
   fill(0);
