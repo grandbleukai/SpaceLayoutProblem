@@ -22,6 +22,12 @@ class Population
 		}
 	}
 
+	// void printdna(){
+	// 	println(population[1].dna.genes[0].x);
+	// }
+
+
+
 	// Calculate fitness for ezch creature
 	void fitness(){
 		for (int i = 0; i<population.length; i++){
@@ -36,7 +42,19 @@ class Population
 
 		// Calculate total fitness of whole population
 		float maxFitness = getMaxFitness();
-	}
+
+    // Calculate fitness for each member of the population (scaled to value between 0 and 1)
+    // Based on fitness, each member will get added to the mating pool a certain number of times
+    // A higher fitness = more entries to mating pool = more likely to be picked as a parent
+    // A lower fitness = fewer entries to mating pool = less likely to be picked as a parent
+    for (int i = 0; i < population.length; i++) {
+    	float fitnessNormal = map(population[i].getFitness(),0,maxFitness,0,1);
+      int n = (int) (fitnessNormal * 100);  // Arbitrary multiplier
+      // for (int j = 0; j < n; j++) {
+      	matingPool.add(population[i]);
+      // }
+    }
+  }
 
 	// Making the next generation
 	void reproduction(){
@@ -64,6 +82,9 @@ class Population
 		return generations;
 	}
 
+	Roomsets getRoomsets(int i){
+		return population[i];
+	}
 
 	// Find highest fitness for the population
 	float getMaxFitness(){

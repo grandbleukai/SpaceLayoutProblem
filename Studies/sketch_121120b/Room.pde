@@ -10,19 +10,12 @@ class Room
 	Room (PVector gene){
 		// PVector elements are float by default
 		xPos = int(gene.x);
+		println("xpos = "+ gene.x);
 		yPos = int(gene.y);
 		int type = (int) gene.z;
-		
-		switch (type){
-			// Bedroom
-			case 0 :
-				int[][] roomValue = {{1,1,1},{1,1,1}};
-			break;
-		}
 
-
-		if (type == 0){
-			int[][] roomValue = {{1,1,1},{1,1,1}};
-		}
+		// とりあえず全部一緒にしてみる
+		int[][] rv = {{1,1,1},{1,1,1}};
+		this.roomValue = rv;
 	}
 }

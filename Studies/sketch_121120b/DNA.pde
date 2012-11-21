@@ -12,6 +12,7 @@ class DNA
     for (int i = 0; i<genes.length; i++){
       PVector v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
       genes[i] = v;
+      println("gene = "+ v);
     }
   }
 
@@ -46,8 +47,8 @@ class DNA
 	void mutate(float m){
 		for (int i = 0; i<genes.length; i++){
 			if(random(1) < m){
-				genes[i].x += (int) random(-10, 10);
-				genes[i].y += (int) random(-10, 10);
+				genes[i].x = (int) random(0, gridWidth);
+				genes[i].y = (int) random(0, gridHeight);
 			}
 		}
 	}
