@@ -12,7 +12,6 @@ class DNA
     for (int i = 0; i<genes.length; i++){
       PVector v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
       genes[i] = v;
-      println("gene = "+ v);
     }
   }
 

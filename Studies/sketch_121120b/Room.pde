@@ -10,7 +10,6 @@ class Room
 	Room (PVector gene){
 		// PVector elements are float by default
 		xPos = int(gene.x);
-		println("xpos = "+ gene.x);
 		yPos = int(gene.y);
 		int type = (int) gene.z;
 

@@ -32,18 +32,11 @@ class Roomsets
 	// Fitness Function
 	void fitness(){
 		int[][] gridValue = grid.gridValue;
-		// println("print room length =" + rooms.length);
-		// println("print roomValue length =" + rooms[0].roomValue.length);
-		// println("print roomvalue[] length =" + rooms[0].roomValue[0].length);
-		// println("print gridValue length =" + gridValue.length + "*" + gridValue[0].length);
-
 		for (int k = 0; k<rooms.length; k++){
 			for (int i = 0; i<rooms[k].roomValue.length; i++){
 				for (int j = 0; j<rooms[k].roomValue[0].length; j++){
-					// println(" xPos"+ rooms[k].xPos +" yPos"+ rooms[k].yPos);
 					int xi = gridWidth+i+rooms[k].xPos;
 					int yj = gridHeight+j+rooms[k].yPos;
-					// println("xi"+ xi +"yj"+ yj +"k"+ k +"i"+ i +"j"+ j);
 					gridValue[xi][yj] += rooms[k].roomValue[i][j];
 				}
 			}

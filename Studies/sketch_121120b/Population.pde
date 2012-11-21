@@ -21,13 +21,7 @@ class Population
 			population[i] = new Roomsets(dna);
 		}
 	}
-
-	// void printdna(){
-	// 	println(population[1].dna.genes[0].x);
-	// }
-
-
-
+	
 	// Calculate fitness for ezch creature
 	void fitness(){
 		for (int i = 0; i<population.length; i++){

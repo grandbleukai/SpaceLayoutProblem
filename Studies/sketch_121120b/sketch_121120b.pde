@@ -1,20 +1,25 @@
-/**
- *  Grid layout system
- *
- *  @author Nishimura Kai
- *  @since  2012-11-20
- */
+/*
+*  Grid layout system
+*
+*  @author Nishimura Kai
+*  @since  2012-11-20
+*/
 
- int gridWidth = 8;
- int gridHeight = 8;
- int extraGridWidth = gridWidth*3;
- int extraGridHeight = gridHeight*3;
- int[] roomArray = {0,0};
+int gridWidth = 8;
+int gridHeight = 8;
+int extraGridWidth = gridWidth*3;
+int extraGridHeight = gridHeight*3;
+int[] roomArray = {0,0,0,0};
+int populationNumber = 5;
 
 int lifetime; // Howlong should each generation live
 Population population; // Population
 int lifecycle; // Timer for cycle of generation
 int recordtime; // Fastest time to target
+
+
+boolean go = false;
+boolean outsideOk = false;
 
 
 void setup(){
@@ -30,7 +35,7 @@ void setup(){
 
   // Create a population with a mutation rate, and population max
   float mutationRate = 0.01;
-  population = new Population(mutationRate, 5);
+  population = new Population(mutationRate, populationNumber);
 
   // noLoop();
   // frameRate(2);
@@ -39,12 +44,39 @@ void setup(){
 void draw(){
 	background(255);
 
-	population.fitness();
-	population.selection();
-	population.reproduction();
+	// 行列の中に２がある限りGO!!!
+	for (int i = 0; i<populationNumber; i++){
+		int[][] gv = population.getRoomsets(i).grid.gridValue;
+		// 最初はGO
+		go = false;
+		outsideOk = false;
+		int gvSum = 0;
+		for (int j = 0; j<gv.length; j++){
+			for (int k = 0; k<gv[j].length; k++){
+				gvSum += gv[j][k];
+				if (gv[j][k] == 2){
+					go = true;
+				}
+			}
+		}
+		if (population.getRoomsets(i).fitness != gvSum){
+			outsideOk = true;
+		}else {
+			println(population.getRoomsets(i).fitness+"|"+gvSum);			
+		}
+	}
+
+
+	if (outsideOk | go){
+		population.fitness();
+		population.selection();
+		population.reproduction();
+	}
 
 	// Draw grids
-	population.getRoomsets(0).renderGrid(20,200,200);
+	for (int i = 0; i<populationNumber; i++){
+		population.getRoomsets(i).renderGrid(5,150*i,200);		
+	}
 
   // Display some info
   fill(0);
@@ -53,3 +85,4 @@ void draw(){
   text("value: " + population.getRoomsets(0).getFitness(), 10, 54);
   text("xi0: " + population.getRoomsets(0).hoge, 10, 18*4);
 }
+
