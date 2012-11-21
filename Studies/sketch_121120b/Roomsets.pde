@@ -7,6 +7,7 @@ class Roomsets
 	Room[] rooms;
 	Grid grid;
 	int gridEvaluated;
+	int insideValue;
 
 	// hoge is for test I can delete when success
 	int hoge;
@@ -35,19 +36,20 @@ class Roomsets
 		for (int k = 0; k<rooms.length; k++){
 			for (int i = 0; i<rooms[k].roomValue.length; i++){
 				for (int j = 0; j<rooms[k].roomValue[0].length; j++){
-					int xi = gridWidth+i+rooms[k].xPos;
-					int yj = gridHeight+j+rooms[k].yPos;
+					int xi = i+rooms[k].xPos;
+					int yj = j+rooms[k].yPos;
 					gridValue[xi][yj] += rooms[k].roomValue[i][j];
 				}
 			}
 		}
 		hoge = gridWidth + rooms[0].xPos;
 		int gridEvaluated =0;
-		for (int i = gridWidth; i<gridWidth*2; i++){
-			for (int j = gridHeight; j<gridHeight*2; j++){
+		for (int i = 0; i<gridWidth; i++){
+			for (int j = 0; j<gridHeight; j++){
 				gridEvaluated += gridValue[i][j];
 			}
 		}
+		insideValue = gridEvaluated;
 		fitness = gridEvaluated;
 	}
 

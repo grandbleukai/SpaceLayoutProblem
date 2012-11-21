@@ -7,8 +7,8 @@
 
 int gridWidth = 8;
 int gridHeight = 8;
-int extraGridWidth = gridWidth*3;
-int extraGridHeight = gridHeight*3;
+int extraGridWidth = gridWidth*2;
+int extraGridHeight = gridHeight*2;
 int[] roomArray = {0,0,0,0};
 int populationNumber = 5;
 
@@ -54,15 +54,15 @@ void draw(){
 		for (int j = 0; j<gv.length; j++){
 			for (int k = 0; k<gv[j].length; k++){
 				gvSum += gv[j][k];
-				if (gv[j][k] == 2){
+				if (gv[j][k] >= 2){
 					go = true;
 				}
 			}
 		}
-		if (population.getRoomsets(i).fitness != gvSum){
+		if (population.getRoomsets(i).insideValue != gvSum){
 			outsideOk = true;
 		}else {
-			println(population.getRoomsets(i).fitness+"|"+gvSum);			
+			println(population.getRoomsets(i).insideValue+"|"+gvSum);			
 		}
 	}
 
@@ -75,7 +75,7 @@ void draw(){
 
 	// Draw grids
 	for (int i = 0; i<populationNumber; i++){
-		population.getRoomsets(i).renderGrid(5,150*i,200);		
+		population.getRoomsets(i).renderGrid(5,150*i+100,200);		
 	}
 
   // Display some info

@@ -44,8 +44,8 @@ class Grid
         rect(xTop+unitSize*s, yTop+unitSize*t, unitSize, unitSize);
       }
     }
-    for (int i = gridWidth; i<gridWidth*2; i++){
-      for (int j = gridHeight; j<gridHeight*2; j++){
+    for (int i = 0; i<gridWidth; i++){
+      for (int j = 0; j<gridHeight; j++){
         noFill();
         stroke(0);
         rect(xTop+unitSize*i, yTop+unitSize*j, unitSize, unitSize);
