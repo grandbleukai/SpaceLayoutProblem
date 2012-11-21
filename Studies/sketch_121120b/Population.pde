@@ -10,7 +10,7 @@ class Population
 	//  CONSTRUCTOR
 	//--------------------------------------
 	
-	Population (String p, float m, int num) {
+	Population (float m, int num) {
 		// expression
 		mutationRate = m;
 		matingPool = new ArrayList<Roomsets>();

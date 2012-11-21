@@ -3,20 +3,22 @@ class DNA
 	PVector[] genes; // A gene contains xPos, yPos, roomType
 
 	//--------------------------------------
-	//  CONSTRUCTOR #1, create random instance based on an array of room type
+	//  CONSTRUCTOR #1
+  //  create random instance based on an array of room type
 	//--------------------------------------
 	public DNA(int[] roomType){
 		// expression
 		genes = new PVector[roomType.length]; //Create roomType number of genes
     for (int i = 0; i<genes.length; i++){
-      PVector v = new PVector(random(gridWidth),random(gridHeight),(float)roomType[i]);
+      PVector v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
       genes[i] = v;
     }
   }
 
 
 	//--------------------------------------
-	//  CONSTRUCTOR #2, create the instance based on an existing array
+	//  CONSTRUCTOR #2
+  //  create the instance based on an existing array
 	//--------------------------------------
 	DNA (PVector[] newgenes){
 		genes = newgenes;
