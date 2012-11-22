@@ -9,7 +9,7 @@ int gridWidth = 8;
 int gridHeight = 8;
 int extraGridWidth = gridWidth*2;
 int extraGridHeight = gridHeight*2;
-int[] roomArray = {0,0,0,0,0};
+int[] roomArray = {0,0,0,0};
 int populationNumber = 5;
 
 int lifetime; // Howlong should each generation live

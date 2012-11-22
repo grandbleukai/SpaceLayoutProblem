@@ -9,7 +9,7 @@ int gridWidth = 8;
 int gridHeight = 8;
 int extraGridWidth = gridWidth*2;
 int extraGridHeight = gridHeight*2;
-int[] roomArray = {0,0,0,0};
+int[] roomArray = {0,0};
 int populationNumber = 5;
 
 int lifetime; // Howlong should each generation live
@@ -37,7 +37,7 @@ void setup(){
   float mutationRate = 0.01;
   population = new Population(mutationRate, populationNumber);
 
-  // noLoop();
+  noLoop();
   // frameRate(2);
 }
 
@@ -62,7 +62,7 @@ void draw(){
 		if (population.getRoomsets(i).insideValue != gvSum){
 			outsideOk = true;
 		}else {
-			println(population.getRoomsets(i).insideValue+"|"+gvSum);			
+			// println(population.getRoomsets(i).insideValue+"|"+gvSum);			
 		}
 	}
 
@@ -74,7 +74,7 @@ void draw(){
 	}
 
 	// Draw grids
-	for (int i = 0; i<populationNumber; i++){
+	for (int i = 0; i<5; i++){
 		population.getRoomsets(i).renderGrid(5,150*i+100,200);		
 	}
 
