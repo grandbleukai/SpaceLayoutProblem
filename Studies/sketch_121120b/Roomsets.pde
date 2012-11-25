@@ -6,12 +6,13 @@ class Roomsets
 	int[][]	roomValue;  // Room shape
 	Room[] rooms;
 	Grid grid;
+	int[][] gridValue;
 	int gridEvaluated;
 	int insideValue;	// Sum of all elements inside the main grid (house frame)
 	int doubleNumber; // Sum of all elements more than 2 (each-1)
 	int allValue;	// Sum of all value
 
-	// hoge is for test I can delete when success
+	// For debug
 	int hoge;
 
 	// Fitness and DNA
@@ -29,11 +30,14 @@ class Roomsets
 		for (int i = 0; i<roomArray.length; i++){
 			rooms[i] = new Room(dna_.genes[i]);
 		}
-		fitness();
+		setGridValue();
 	}
 
-	// Fitness Function
-	void fitness(){
+	Roomsets(){
+		
+	}
+
+	void setGridValue(){
 		int[][] gridValue = grid.gridValue;
 		allValue = 0;
 		for (int k = 0; k<rooms.length; k++){
@@ -45,26 +49,33 @@ class Roomsets
 					allValue += rooms[k].roomValue[i][j];
 				}
 			}
-			println("jkl;");
 		}
-		hoge = gridWidth + rooms[0].xPos;
-		int doubleNumber = 0;
+		doubleNumber = 0;
 		insideValue = 0;
 		for (int i = 0; i<gridWidth; i++){
 			for (int j = 0; j<gridHeight; j++){
 				insideValue += gridValue[i][j];
+			}
+		}
+		for (int i = 0; i<extraGridWidth; i++){
+			for (int j = 0; j<extraGridHeight; j++){
+				// For debug
+				// println("[i,j]=["+i+","+j+"] gv="+gridValue[i][j]);
 				if (gridValue[i][j] >= 2){
 					doubleNumber += gridValue[i][j] -1;
 				}
 			}
 		}
-		int fitnessRev = allValue-insideValue+doubleNumber;
-		if (fitnessRev == 0){
-			fitness = 100;
-		}else {
-			float fitness = 1/fitnessRev;
-		}
-		println("doubleNumber="+doubleNumber + " insideValue=" +insideValue + " allValue=" + allValue);
+		println(doubleNumber);
+	}
+
+	// Fitness Function
+	void fitness(){
+		int outsideValue = allValue - insideValue;
+		int fitnessRev = outsideValue+doubleNumber;
+		fitness = allValue - fitnessRev;
+		// For debugここで表示される情報はreproductionされたあとの
+		// println("doubleNumber="+doubleNumber + " insideValue=" +insideValue + " allValue=" + allValue);
 	}
 
 	float getFitness(){
@@ -72,13 +83,13 @@ class Roomsets
 	}
 
 	void renderGrid(int size,int x, int y){
-    grid.setPos(size,x,y);
-    grid.render();
-  }
+		grid.setPos(size,x,y);
+		grid.render();
+	}
 
-  DNA getDNA(){
-  	return dna;
-  }
+	DNA getDNA(){
+		return dna;
+	}
 }
 
 

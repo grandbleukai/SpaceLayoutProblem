@@ -9,8 +9,8 @@ int gridWidth = 8;
 int gridHeight = 8;
 int extraGridWidth = gridWidth*2;
 int extraGridHeight = gridHeight*2;
-int[] roomArray = {0,0};
-int populationNumber = 5;
+int[] roomArray = {0,0,0};
+int populationNumber = 40;
 
 int lifetime; // Howlong should each generation live
 Population population; // Population
@@ -34,11 +34,11 @@ void setup(){
   recordtime = lifetime;
 
   // Create a population with a mutation rate, and population max
-  float mutationRate = 0.01;
+  float mutationRate = 0.1;
   population = new Population(mutationRate, populationNumber);
 
-  noLoop();
-  // frameRate(2);
+  // noLoop();
+  // frameRate(10);
 }
 
 void draw(){
@@ -61,7 +61,7 @@ void draw(){
 		}
 		if (population.getRoomsets(i).insideValue != gvSum){
 			outsideOk = true;
-		}else {
+			}else {
 			// println(population.getRoomsets(i).insideValue+"|"+gvSum);			
 		}
 	}
@@ -69,14 +69,32 @@ void draw(){
 
 	if (outsideOk | go){
 		population.fitness();
+		for (int i = 0; i<min(5, populationNumber); i++){
+			population.getRoomsets(i).renderGrid(5,400,120*i+100);
+			Roomsets r = population.getRoomsets(i);
+			fill(0);
+			text("doubleNumber="+r.doubleNumber + " insideValue=" +r.insideValue, 400, 120*(1+i)+65);
+		}
+		population.getTopSets().renderGrid(12,80,100);
 		population.selection();
 		population.reproduction();
-	}
+		}else {
+			population.getTopSets().renderGrid(12,80,100);
+			for (int i = 0; i<min(5, populationNumber); i++){
+				population.getRoomsets(i).renderGrid(5,400,120*i+100);
+				Roomsets r = population.getRoomsets(i);
+				fill(0);
+				text("doubleNumber="+r.doubleNumber + " insideValue=" +r.insideValue, 400, 120*(1+i)+65);
+			}
+		}
 
-	// Draw grids
-	for (int i = 0; i<5; i++){
-		population.getRoomsets(i).renderGrid(5,150*i+100,200);		
-	}
+	// Draw first grids
+	// if (population.getGenerations() == 0){
+	// 	for (int i = 0; i<populationNumber; i++){
+	// 		population.getRoomsets(i).renderGrid(5,150*i+100,200);		
+	// 	}		
+	// }
+
 
   // Display some info
   fill(0);
@@ -84,5 +102,9 @@ void draw(){
   text("Cycles left: " + (lifetime-lifecycle), 10, 36);
   text("value: " + population.getRoomsets(0).getFitness(), 10, 54);
   text("xi0: " + population.getRoomsets(0).hoge, 10, 18*4);
+}
+
+void mousePressed(){
+	stop();
 }
 

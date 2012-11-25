@@ -22,7 +22,7 @@ class Population
 		}
 	}
 
-	// Calculate fitness for ezch creature
+	// Calculate fitness for each creature
 	void fitness(){
 		for (int i = 0; i<population.length; i++){
 			population[i].fitness();
@@ -44,9 +44,9 @@ class Population
     for (int i = 0; i < population.length; i++) {
     	float fitnessNormal = map(population[i].getFitness(),0,maxFitness,0,1);
       int n = (int) (fitnessNormal * 100);  // Arbitrary multiplier
-      // for (int j = 0; j < n; j++) {
+      for (int j = 0; j < n; j++) {
       	matingPool.add(population[i]);
-      // }
+      }
     }
   }
 
@@ -78,6 +78,17 @@ class Population
 
 	Roomsets getRoomsets(int i){
 		return population[i];
+	}
+
+	Roomsets getTopSets(){
+		Roomsets topSets = new Roomsets();
+		int index;
+		for (int i = 0; i<population.length; i++){
+			// if (population[i].getFitness() == getMaxFitness()){
+				topSets = population[i];
+			// }
+		}
+		return topSets;
 	}
 
 	// Find highest fitness for the population

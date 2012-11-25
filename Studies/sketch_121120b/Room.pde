@@ -14,7 +14,7 @@ class Room
 		int type = (int) gene.z;
 
 		// とりあえず全部一緒にしてみる
-		int[][] rv = {{1,1},{1,1}};
+		int[][] rv = {{1,1,1,1,1},{1,1,1,1,1}};
 		this.roomValue = rv;
 	}
 }
