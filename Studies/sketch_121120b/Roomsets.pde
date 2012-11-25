@@ -34,7 +34,7 @@ class Roomsets
 	}
 
 	Roomsets(){
-		
+
 	}
 
 	void setGridValue(){
@@ -66,7 +66,6 @@ class Roomsets
 				}
 			}
 		}
-		println(doubleNumber);
 	}
 
 	// Fitness Function

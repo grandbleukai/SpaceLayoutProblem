@@ -38,7 +38,7 @@ void setup(){
   population = new Population(mutationRate, populationNumber);
 
   // noLoop();
-  // frameRate(10);
+  frameRate(2);
 }
 
 void draw(){
@@ -73,9 +73,13 @@ void draw(){
 			population.getRoomsets(i).renderGrid(5,400,120*i+100);
 			Roomsets r = population.getRoomsets(i);
 			fill(0);
-			text("doubleNumber="+r.doubleNumber + " insideValue=" +r.insideValue, 400, 120*(1+i)+65);
+			text("fitness="+r.getFitness() +" doubleNumber="+r.doubleNumber + " insideValue=" +r.insideValue, 400, 120*(1+i)+65);
 		}
-		population.getTopSets().renderGrid(12,80,100);
+		Roomsets rt = population.getTopSets();
+		rt.renderGrid(12,80,100);
+		fill(0);
+		text("fitness="+rt.getFitness()+ " doubleNumber="+rt.doubleNumber + " insideValue=" +rt.insideValue, 20, 310);
+
 		population.selection();
 		population.reproduction();
 		}else {
@@ -89,19 +93,24 @@ void draw(){
 		}
 
 	// Draw first grids
-	// if (population.getGenerations() == 0){
-	// 	for (int i = 0; i<populationNumber; i++){
-	// 		population.getRoomsets(i).renderGrid(5,150*i+100,200);		
-	// 	}		
-	// }
+	if (population.getGenerations() == 0){
+		for (int i = 0; i<populationNumber; i++){
+			population.getRoomsets(i).renderGrid(5,150*i+100,200);		
+		}		
+	}
 
 
   // Display some info
   fill(0);
+  float fitSum = 0;
+  for (int i = 0; i<populationNumber; i++){
+  	fitSum += population.getRoomsets(i).getFitness();
+  }
+  println(population.getTopSets().getFitness());
+  float fitAve = fitSum/populationNumber;
   text("Generation #: " + population.getGenerations(), 10, 18);
-  text("Cycles left: " + (lifetime-lifecycle), 10, 36);
-  text("value: " + population.getRoomsets(0).getFitness(), 10, 54);
-  text("xi0: " + population.getRoomsets(0).hoge, 10, 18*4);
+  text("fitness: " + population.getTopSets().getFitness(), 10, 36);
+  text("fitness average: " + fitSum, 10, 54);
 }
 
 void mousePressed(){
