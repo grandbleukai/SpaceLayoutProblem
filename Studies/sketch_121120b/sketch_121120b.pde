@@ -4,13 +4,16 @@
 *  @author Nishimura Kai
 *  @since  2012-11-20
 */
+//------------------------
+//	部屋の形はRoom.pdeで記述されている
+//------------------------
 
 int gridWidth = 8;
 int gridHeight = 8;
 int extraGridWidth = gridWidth*2;
 int extraGridHeight = gridHeight*2;
-int[] roomArray = {0,0,0,1};
-int populationNumber = 100;
+int[] roomArray = {0,4,3,3,2,5,5};	//部屋の数と種類
+int populationNumber = 1000;
 
 int lifetime; // Howlong should each generation live
 Population population; // Population
@@ -34,11 +37,11 @@ void setup(){
   recordtime = lifetime;
 
   // Create a population with a mutation rate, and population max
-  float mutationRate = 0.1;
+  float mutationRate = 0.01;
   population = new Population(mutationRate, populationNumber);
 
   // noLoop();
-  frameRate(5);
+  // frameRate(5);
 }
 
 void draw(){
