@@ -1,6 +1,6 @@
 class Room 
 {
-	int[][] roomValue;
+	int[][][] roomValue;
 	int xPos, yPos; // Top left position of a room
 	int type;
 
@@ -11,10 +11,14 @@ class Room
 		// PVector elements are float by default
 		xPos = int(gene.x);
 		yPos = int(gene.y);
-		int type = (int) gene.z;
+		type = int(gene.z);
 
+		int index = 30; // Number of room typesZ
+		roomValue = new int[index][][];
 		// とりあえず全部一緒にしてみる
-		int[][] rv = {{1,1,1,1,1},{1,1,1,1,1}};
-		this.roomValue = rv;
+		int[][] rv0 = {{1,1,1},{1,1,0}};
+		int[][] rv1 = {{1,1},{1,1},{1,1}};
+		roomValue[0] = rv0;
+		roomValue[1] = rv1;
 	}
 }

@@ -30,6 +30,7 @@ class Roomsets
 		for (int i = 0; i<roomArray.length; i++){
 			rooms[i] = new Room(dna_.genes[i]);
 		}
+
 		setGridValue();
 	}
 
@@ -40,13 +41,14 @@ class Roomsets
 	void setGridValue(){
 		int[][] gridValue = grid.gridValue;
 		allValue = 0;
+
 		for (int k = 0; k<rooms.length; k++){
-			for (int i = 0; i<rooms[k].roomValue.length; i++){
-				for (int j = 0; j<rooms[k].roomValue[0].length; j++){
+			for (int i = 0; i<rooms[k].roomValue[rooms[k].type].length; i++){
+				for (int j = 0; j<rooms[k].roomValue[rooms[k].type][i].length; j++){
 					int xi = i+rooms[k].xPos;
 					int yj = j+rooms[k].yPos;
-					gridValue[xi][yj] += rooms[k].roomValue[i][j];
-					allValue += rooms[k].roomValue[i][j];
+					gridValue[xi][yj] += rooms[k].roomValue[rooms[k].type][i][j];
+					allValue += rooms[k].roomValue[rooms[k].type][i][j];
 				}
 			}
 		}

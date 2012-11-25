@@ -9,7 +9,7 @@ int gridWidth = 8;
 int gridHeight = 8;
 int extraGridWidth = gridWidth*2;
 int extraGridHeight = gridHeight*2;
-int[] roomArray = {0,0,0};
+int[] roomArray = {0,1,0};
 int populationNumber = 40;
 
 int lifetime; // Howlong should each generation live
@@ -106,7 +106,6 @@ void draw(){
   for (int i = 0; i<populationNumber; i++){
   	fitSum += population.getRoomsets(i).getFitness();
   }
-  println(population.getTopSets().getFitness());
   float fitAve = fitSum/populationNumber;
   text("Generation #: " + population.getGenerations(), 10, 18);
   text("fitness: " + population.getTopSets().getFitness(), 10, 36);
