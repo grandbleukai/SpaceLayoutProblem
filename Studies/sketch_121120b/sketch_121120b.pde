@@ -9,8 +9,8 @@ int gridWidth = 8;
 int gridHeight = 8;
 int extraGridWidth = gridWidth*2;
 int extraGridHeight = gridHeight*2;
-int[] roomArray = {0,1,0};
-int populationNumber = 40;
+int[] roomArray = {0,0,0,1};
+int populationNumber = 100;
 
 int lifetime; // Howlong should each generation live
 Population population; // Population
@@ -38,7 +38,7 @@ void setup(){
   population = new Population(mutationRate, populationNumber);
 
   // noLoop();
-  frameRate(2);
+  frameRate(5);
 }
 
 void draw(){
