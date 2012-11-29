@@ -9,12 +9,36 @@ class DNA
 	public DNA(int[] roomType){
 		// expression
 		genes = new PVector[roomType.length]; //Create roomType number of genes
-    for (int i = 0; i<genes.length; i++){
-      PVector v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
-      genes[i] = v;
-    }
-  }
+		for (int i = 0; i<genes.length; i++){
+			PVector v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
+			for (int j = 0; j<i; j++){
+				while (genes[j].x == v.x && genes[j].y == v.y){
+					v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
+				}
+				// if (genes[j].x == genes[i].x && genes[j].y == genes[j].y){
+				// 	v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
+				// }
+			}
+			genes[i] = v;
+		}
+	}
 
+	// boolean checkSamePosition(PVector gene){
+	// 	// Make sure that same position will not occur
+	// 	for (int i = 0; i<genes.length; i++){
+	// 		PVector v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
+	// 		for (int j = 0; j<i; j++){
+	// 			while (genes[j].x == v.x && genes[j].y == v.y){
+	// 				v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
+	// 			}
+	// 			// if (genes[j].x == genes[i].x && genes[j].y == genes[j].y){
+	// 			// 	v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
+	// 			// }
+	// 		}
+	// 		genes[i] = v;
+	// 	}
+	// 	return true;
+	// }
 
 	//--------------------------------------
 	//  CONSTRUCTOR #2

@@ -16,7 +16,7 @@ class Room
 		roomValue = new int[index][][];
 		// 縦向き
 		int[][] rv0 = {{1,1},{0,0}};
-		int[][] rv1 = {{1,1},{1,1},{1,1}};
+		int[][] rv1 = {{1,1},{1,1}};
 		int[][] rv2 = {{1,1},{1,1},{1,1},{1,1}};
 		// 横向き
 		int[][] rv3 = {{1,0},{1,0}};  //トイレ、階段
@@ -32,7 +32,7 @@ class Room
 		roomValue[5] = rv5;
 		roomValue[6] = rv6;
 		// はみ出さないようにmapする
-		xPos = (int)map(gene.x, 0, gridWidth, 0, gridWidth-this.roomValue[type].length+1);
-		yPos = (int)map(gene.y, 0, gridWidth, 0, gridWidth-this.roomValue[type][0].length+1);
+		xPos = (int)map(gene.x, 0, gridWidth, 0, gridWidth-this.roomValue[type].length+2);
+		yPos = (int)map(gene.y, 0, gridWidth, 0, gridWidth-this.roomValue[type][0].length+2);
 	}
 }

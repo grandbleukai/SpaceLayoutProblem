@@ -8,11 +8,11 @@
 //	部屋の形はRoom.pdeで記述されている
 //------------------------
 
-int gridWidth = 8;
-int gridHeight = 8;
+int gridWidth = 3;
+int gridHeight = 2;
 int extraGridWidth = gridWidth*2;
 int extraGridHeight = gridHeight*2;
-int[] roomArray = {0,4,3,3,2,5,5};	//部屋の数と種類
+int[] roomArray = {0,0,0};	//部屋の数と種類
 int populationNumber = 1000;
 
 int lifetime; // Howlong should each generation live
@@ -37,11 +37,11 @@ void setup(){
   recordtime = lifetime;
 
   // Create a population with a mutation rate, and population max
-  float mutationRate = 0.01;
+  float mutationRate = 0.0;
   population = new Population(mutationRate, populationNumber);
 
   // noLoop();
-  // frameRate(5);
+   frameRate(2);
 }
 
 void draw(){

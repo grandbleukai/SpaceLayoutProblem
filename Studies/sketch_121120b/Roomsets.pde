@@ -73,10 +73,8 @@ class Roomsets
 	// Fitness Function
 	void fitness(){
 		int outsideValue = allValue - insideValue;
-		int fitnessRev = outsideValue+doubleNumber;
+		int fitnessRev = doubleNumber;
 		fitness = allValue - fitnessRev;
-		// For debugここで表示される情報はreproductionされたあとの
-		// println("doubleNumber="+doubleNumber + " insideValue=" +insideValue + " allValue=" + allValue);
 	}
 
 	float getFitness(){
