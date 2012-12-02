@@ -3,6 +3,7 @@ class Room
 	int[][][] roomValue;
 	int xPos, yPos; // Top left position of a room
 	int type;
+	// 室の色はGrid.pdeで指定する！！
 
 	//--------------------------------------
 	//  CONSTRUCTOR

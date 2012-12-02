@@ -55,21 +55,22 @@ class Grid
       for (int t = 0; t<gridHeight; t++){
         noStroke();
         stroke(240);
-        // fill(255-50*gridValue[s][t][0]);
         if (gridValue[s][t][1]==6){
-          fill(225,0,0);
-          if (gridValue[s][t][0]>1){
-            fill(255-50*gridValue[s][t][0]);
-          }
+          fill(c1);
+          stroke(c1);
         }
         else if (gridValue[s][t][1]==5) {
-          fill(0,225,0);
-          if (gridValue[s][t][0]>1){
-            fill(255-50*gridValue[s][t][0]);
-          }
+          fill(c2);
+          stroke(c2);
         }
         else {
           fill(255);
+        }
+
+        //かぶってる部分をグレーにする
+        if (gridValue[s][t][0]>1){  
+            fill(255-20*gridValue[s][t][0]);
+            stroke(255-20*gridValue[s][t][0]);
         }
         rect(xTop+unitSize*s, yTop+unitSize*t, unitSize, unitSize);
       }

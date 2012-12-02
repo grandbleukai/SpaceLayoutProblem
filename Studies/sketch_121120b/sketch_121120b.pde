@@ -17,6 +17,16 @@ int populationNumber = 100;
 boolean go = true;
 int us = 5; //右側の探索中のグリッドのサイズ
 
+
+color c1 = color(31, 54, 66);
+color c2 = color(109, 150, 141);
+color c3 = color(182, 204, 184);
+color c4 = color(255, 226, 179);
+color c5 = color(86, 73, 63);
+
+
+
+
 Roomsets top1,top2,top3,top4,top5;
 
 // 最初に配置する定位置の室
