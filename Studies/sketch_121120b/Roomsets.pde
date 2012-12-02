@@ -13,10 +13,6 @@ class Roomsets
 	int allValue;	// Sum of all value
 	boolean gridFilled;
 
-
-	// For debug
-	int hoge;
-
 	// Fitness and DNA
 	float fitness;	// Fitness for a roomset
 	DNA dna;

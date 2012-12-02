@@ -17,8 +17,6 @@ int populationNumber = 100;
 boolean go = true;
 int us = 5; //右側の探索中のグリッドのサイズ
 
-
-
 Roomsets top1,top2,top3,top4,top5;
 
 // 最初に配置する定位置の室
