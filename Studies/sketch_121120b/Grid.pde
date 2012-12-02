@@ -29,6 +29,14 @@ class Grid
     }
   }
 
+  void setInitialValue(int x, int y, int w, int h) {
+    for (int i = x; i<x+w; i++){
+      for (int j = y; j<y+h; j++){
+        gridValue[i][j] = 1;
+      }
+    }
+  }
+
   void setPos(int s, int x, int y){
     this.unitSize = s;
     this.xTop = x;

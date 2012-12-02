@@ -13,6 +13,7 @@ class Roomsets
 	int allValue;	// Sum of all value
 	boolean gridFilled;
 
+
 	// For debug
 	int hoge;
 
@@ -42,7 +43,11 @@ class Roomsets
 
 	void setGridValue(){
 		int[][] gridValue = grid.gridValue;
-		allValue = 0;
+
+		//　最初に定位置の室を配置する
+		grid.setInitialValue(initX,initY,initW,initH);
+
+		allValue = initW*initH;
 
 		for (int k = 0; k<rooms.length; k++){
 			for (int i = 0; i<rooms[k].roomValue[rooms[k].type].length; i++){
@@ -85,7 +90,15 @@ class Roomsets
 	void fitness(){
 		int outsideValue = allValue - insideValue;
 		int fitnessRev = doubleNumber;
-		fitness = gridWidth*gridHeight + insideValue - allValue - doubleNumber*2;
+
+		int outlineValue = 0;
+		for (int i = 0; i<gridWidth; i++){
+			for (int j = 0; j<gridHeight; j++){
+				outlineValue += grid.gridValue[i][0] + grid.gridValue[i][gridHeight-1] + grid.gridValue[0][j] + grid.gridValue[gridWidth-1][j] 
+				- grid.gridValue[0][0] - grid.gridValue[0][gridHeight-1] - grid.gridValue[gridWidth-1][0] - grid.gridValue[gridWidth-1][gridHeight-1];
+			}
+		}
+		fitness = gridWidth*gridHeight + insideValue - allValue - doubleNumber*2 + outlineValue;
 	}
 
 	float getFitness(){

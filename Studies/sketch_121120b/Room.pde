@@ -22,7 +22,7 @@ class Room
 		int[][] rv3 = {{1,0},{1,0}};  //トイレ、階段
 		int[][] rv4 = {{1,1,1},{1,1,1}};  //寝室
 		int[][] rv5 = {{1,1,1,1},{1,1,1,1}};  //寝室
-		int[][] rv6 = {{1,1,1,1,1,1},{1,1,1,1,1,1},{1,1,1,1,1,1},{1,1,1,1,1,1}};  //家族室
+		int[][] rv6 = {{1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1}};  //家族室
 
 		roomValue[0] = rv0;
 		roomValue[1] = rv1;
@@ -32,7 +32,9 @@ class Room
 		roomValue[5] = rv5;
 		roomValue[6] = rv6;
 		// はみ出さないようにmapする
-		xPos = (int)map(gene.x, 0, gridWidth, 0, gridWidth-this.roomValue[type].length+1);
-		yPos = (int)map(gene.y, 0, gridWidth, 0, gridWidth-this.roomValue[type][0].length+1);
+		// xPos = int(map(gene.x, 0, gridWidth, 0, gridWidth-this.roomValue[type].length+1));
+		// yPos = int(map(gene.y, 0, gridWidth, 0, gridWidth-this.roomValue[type][0].length+1));
+		xPos = (int(map(gene.x, 0, gridWidth, 0, gridWidth-this.roomValue[type].length+1))/2)*2;
+		yPos = (int(map(gene.y, 0, gridWidth, 0, gridWidth-this.roomValue[type][0].length+1))/2)*2;
 	}
 }

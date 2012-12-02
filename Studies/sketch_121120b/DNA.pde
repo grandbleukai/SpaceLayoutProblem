@@ -10,15 +10,15 @@ class DNA
 		// expression
 		genes = new PVector[roomType.length]; //Create roomType number of genes
 		for (int i = 0; i<genes.length; i++){
-			PVector v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
-			for (int j = 0; j<i; j++){
-				while (genes[j].x == v.x && genes[j].y == v.y){
-					v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
-				}
-				// if (genes[j].x == genes[i].x && genes[j].y == genes[j].y){
-				// 	v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
-				// }
-			}
+			PVector v = new PVector(int(random(gridWidth/2)),int(random(gridHeight/2)),(int)roomType[i]);
+			// for (int j = 0; j<i; j++){
+			// 	while (genes[j].x == v.x && genes[j].y == v.y){
+			// 		v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
+			// 	}
+			// 	// if (genes[j].x == genes[i].x && genes[j].y == genes[j].y){
+			// 	// 	v = new PVector(int(random(gridWidth)),int(random(gridHeight)),(int)roomType[i]);
+			// 	// }
+			// }
 			genes[i] = v;
 		}
 	}

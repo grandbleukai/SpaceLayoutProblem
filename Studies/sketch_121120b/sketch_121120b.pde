@@ -8,18 +8,24 @@
 //	部屋の形はRoom.pdeで記述されている
 //------------------------
 
-int gridWidth = 5;
+int gridWidth = 10;
 int gridHeight = 5;
 int extraGridWidth = gridWidth*2;
 int extraGridHeight = gridHeight*2;
-int[] roomArray = {0,0,0,1,1,3,3};	//部屋の数と種類
-int populationNumber = 6;
+int[] roomArray = {5,5,5,6};	//部屋の数と種類
+int populationNumber = 200;
+
+// 最初に配置する定位置の室
+int initX = 2;
+int initY = 4;
+int initW = 6;
+int initH = 4;
 
 int lifetime; // Howlong should each generation live
 Population population; // Population
 int lifecycle; // Timer for cycle of generation
 int recordtime; // Fastest time to target
-ArrayList<Roomsets> filledSets = new ArrayList<Roomsets>();
+Roomsets[] topFitsEver;	//それまでで一番fitnessが高かったroomsetを記憶する
 
 boolean go = false;
 boolean outsideOk = false;
@@ -41,7 +47,7 @@ void setup(){
   population = new Population(mutationRate, populationNumber);
 
   // noLoop();
-  // frameRate(10);
+  frameRate(10);
 }
 
 void draw(){
@@ -82,12 +88,6 @@ void draw(){
 		rt.renderGrid(12,80,100);
 		fill(0);
 		text("fitness="+rt.getFitness()+ " doubleNumber="+rt.doubleNumber + " insideValue=" +rt.insideValue, 20, 310);
-	}
-
-	for (int i = 0; i<populationNumber; i++){
-		if (population.getRoomsets(i).gridFilled == true){
-			filledSets.add(population.getRoomsets(i));
-		}
 	}
 
 	// Display some info
