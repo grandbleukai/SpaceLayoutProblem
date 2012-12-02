@@ -80,15 +80,15 @@ class Population
 		return population[i];
 	}
 
-	Roomsets getTopSets(){
-		Roomsets topSets = new Roomsets();
+	Roomsets getTopSet(){
+		Roomsets topSet = new Roomsets();
 		int index;
 		for (int i = 0; i<population.length; i++){
-			// if (population[i].getFitness() == getMaxFitness()){
-				topSets = population[i];
-			// }
+			if (population[i].getFitness() == getMaxFitness()){
+				topSet = population[i];
+			}
 		}
-		return topSets;
+		return topSet;
 	}
 
 	// Find highest fitness for the population

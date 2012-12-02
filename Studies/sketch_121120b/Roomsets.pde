@@ -11,6 +11,7 @@ class Roomsets
 	int insideValue;	// Sum of all elements inside the main grid (house frame)
 	int doubleNumber; // Sum of all elements more than 2 (each-1)
 	int allValue;	// Sum of all value
+	boolean gridFilled;
 
 	// For debug
 	int hoge;
@@ -32,6 +33,7 @@ class Roomsets
 		}
 
 		setGridValue();
+		checkFilled();
 	}
 
 	Roomsets(){
@@ -70,14 +72,24 @@ class Roomsets
 		}
 	}
 
+	boolean checkFilled() {
+		if (doubleNumber==0 && allValue == insideValue){
+			gridFilled = true;
+		}else {
+			gridFilled = false;
+		}
+		return gridFilled;
+	}
+
 	// Fitness Function
 	void fitness(){
 		int outsideValue = allValue - insideValue;
 		int fitnessRev = doubleNumber;
-		fitness = allValue - fitnessRev;
+		fitness = gridWidth*gridHeight + insideValue*10 - allValue - doubleNumber;
 	}
 
 	float getFitness(){
+		fitness();
 		return fitness;
 	}
 
