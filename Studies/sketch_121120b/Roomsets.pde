@@ -68,8 +68,6 @@ class Roomsets
 		}
 		for (int i = 0; i<extraGridWidth; i++){
 			for (int j = 0; j<extraGridHeight; j++){
-				// For debug
-				// println("[i,j]=["+i+","+j+"] gv="+gridValue[i][j]);
 				if (gridValue[i][j] >= 2){
 					doubleNumber += gridValue[i][j] -1;
 				}
@@ -94,8 +92,7 @@ class Roomsets
 		int outlineValue = 0;
 		for (int i = 0; i<gridWidth; i++){
 			for (int j = 0; j<gridHeight; j++){
-				outlineValue += grid.gridValue[i][0] + grid.gridValue[i][gridHeight-1] + grid.gridValue[0][j] + grid.gridValue[gridWidth-1][j] 
-				- grid.gridValue[0][0] - grid.gridValue[0][gridHeight-1] - grid.gridValue[gridWidth-1][0] - grid.gridValue[gridWidth-1][gridHeight-1];
+				outlineValue += grid.gridValue[i][0] + grid.gridValue[i][gridHeight-1] + grid.gridValue[0][j] + grid.gridValue[gridWidth-1][j];
 			}
 		}
 		fitness = gridWidth*gridHeight + insideValue - allValue - doubleNumber*2 + outlineValue;
@@ -109,6 +106,8 @@ class Roomsets
 	void renderGrid(int size,int x, int y){
 		grid.setPos(size,x,y);
 		grid.render();
+		fill(0);
+		text("fitness="+getFitness(), x, y + size*gridHeight+15);
 	}
 
 	DNA getDNA(){

@@ -44,8 +44,8 @@ class Grid
   }
 
   void render(){
-    for (int s = 0; s<extraGridWidth; s++){
-      for (int t = 0; t<extraGridHeight; t++){
+    for (int s = 0; s<gridWidth; s++){
+      for (int t = 0; t<gridHeight; t++){
         noStroke();
         stroke(240);
         fill(255-50*gridValue[s][t]);

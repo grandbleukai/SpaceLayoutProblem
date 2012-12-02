@@ -9,11 +9,17 @@
 //------------------------
 
 int gridWidth = 10;
-int gridHeight = 5;
+int gridHeight = 10;
 int extraGridWidth = gridWidth*2;
 int extraGridHeight = gridHeight*2;
 int[] roomArray = {5,5,5,6};	//部屋の数と種類
-int populationNumber = 200;
+int populationNumber = 100;
+boolean go = true;
+int us = 5; //右側の探索中のグリッドのサイズ
+
+
+
+Roomsets top1,top2,top3,top4,top5;
 
 // 最初に配置する定位置の室
 int initX = 2;
@@ -27,10 +33,6 @@ int lifecycle; // Timer for cycle of generation
 int recordtime; // Fastest time to target
 Roomsets[] topFitsEver;	//それまでで一番fitnessが高かったroomsetを記憶する
 
-boolean go = false;
-boolean outsideOk = false;
-
-
 void setup(){
 	size(800, 800);
 	smooth();
@@ -42,52 +44,48 @@ void setup(){
   lifecycle = 0;
   recordtime = lifetime;
 
+  top1 = new Roomsets();
+  top2 = new Roomsets();
+  top3 = new Roomsets();
+  top4 = new Roomsets();
+  top5 = new Roomsets();
+
   // Create a population with a mutation rate, and population max
   float mutationRate = 0.1;
   population = new Population(mutationRate, populationNumber);
 
   // noLoop();
-  frameRate(10);
+  // frameRate(10);
 }
 
 void draw(){
 	background(255);
 
-	boolean go = true;
-	for (int i = 0; i<populationNumber; i++){
-		if (population.getRoomsets(i).gridFilled){
-			go = false;
-
-		}
-	}
-
 	if (go){
 		population.fitness();
-		for (int i = 0; i<min(5, populationNumber); i++){
-			population.getRoomsets(i).renderGrid(5,400,120*i+100);
-			Roomsets r = population.getRoomsets(i);
-			fill(0);
-			text("fitness="+r.getFitness() +" doubleNumber="+r.doubleNumber + " insideValue=" +r.insideValue, 400, 120*(1+i)+65);
-		}
-		Roomsets rt = population.getTopSet();
-		rt.renderGrid(12,80,100);
-		fill(0);
-		text("fitness="+rt.getFitness()+ " doubleNumber="+rt.doubleNumber + " insideValue=" +rt.insideValue, 20, 410);
 		population.selection();
 		population.reproduction();
 	}
-	else {
-		population.getTopSet().renderGrid(12,80,100);
-		for (int i = 0; i<min(5, populationNumber); i++){
-			population.getRoomsets(i).renderGrid(5,400,120*i+100);
-			Roomsets r = population.getRoomsets(i);
-			fill(0);
-			text("fitness="+r.getFitness()+" doubleNumber="+r.doubleNumber + " insideValue=" +r.insideValue, 400, 120*(1+i)+65);
-		}
-		Roomsets rt = population.getTopSet();
-		rt.renderGrid(12,80,100);
-		fill(0);
-		text("fitness="+rt.getFitness()+ " doubleNumber="+rt.doubleNumber + " insideValue=" +rt.insideValue, 20, 310);
+	for (int i = 0; i<min(3, populationNumber); i++){
+		population.getRoomsets(i).renderGrid(us,400,(us*gridHeight*2+40)*i+100);
+		Roomsets r = population.getRoomsets(i);
+	}
+	Roomsets rt = population.getTopSet();
+	rt.renderGrid(12,80,100);
+
+	if (population.getGenerations()<5){
+		top1 = population.getRoomsets(1);
+		top2 = top1;
+		top3 = top1;
+		top4 = top1;
+		top5 = top1;
+	}else {
+		setTopSets();
+		top1.renderGrid(5,50,600);
+		top2.renderGrid(5,150,600);
+		top3.renderGrid(5,250,600);
+		top4.renderGrid(5,350,600);
+		top5.renderGrid(5,450,600);
 	}
 
 	// Display some info
@@ -102,7 +100,38 @@ void draw(){
 	text("fitness average: " + fitSum/populationNumber, 10, 54);
 }
 
+void setTopSets() {
+	Roomsets rt = population.getTopSet();
+	if (rt.doubleNumber == 0){
+		if (rt.getFitness()>top1.getFitness()){
+			top5 = top4;
+			top4 = top3;
+			top3 = top2;
+			top2 = top1;
+			top1 = rt;
+		}
+		else if (rt.getFitness()>top2.getFitness()) {
+			top5 = top4;
+			top4 = top3;
+			top3 = top2;
+			top2 = rt;
+		}
+		else if (rt.getFitness()>top3.getFitness()) {
+			top5 = top4;
+			top4 = top3;
+			top3 = rt;
+		}
+		else if (rt.getFitness()>top4.getFitness()) {
+			top5 = top4;
+			top4 = rt;
+		}
+		else if (rt.getFitness()>top5.getFitness()) {
+			top5 = rt;
+		}		
+	}
+}
+
 void mousePressed(){
-	stop();
+	go =! go;
 }
 
