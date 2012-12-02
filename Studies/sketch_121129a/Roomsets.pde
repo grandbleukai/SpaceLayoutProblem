@@ -2,7 +2,6 @@
 class Roomsets 
 {
 	// Geometrical Properties
-
 	int[][]	roomValue;  // Room shape
 	Room[] rooms;
 	Grid grid;
@@ -11,7 +10,7 @@ class Roomsets
 	int insideValue;	// Sum of all elements inside the main grid (house frame)
 	int doubleNumber; // Sum of all elements more than 2 (each-1)
 	int allValue;	// Sum of all value
-
+	ArrayList PackedGrid;	// Memory the patterns correctly packed in the grid
 	// For debug
 	int hoge;
 
