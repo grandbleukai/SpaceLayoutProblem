@@ -12,7 +12,7 @@ int gridWidth = 5;
 int gridHeight = 5;
 int extraGridWidth = gridWidth*2;
 int extraGridHeight = gridHeight*2;
-int[] roomArray = {0,0,0,1,1};	//部屋の数と種類
+int[] roomArray = {0,0,0,1,1,3,3};	//部屋の数と種類
 int populationNumber = 6;
 
 int lifetime; // Howlong should each generation live
@@ -41,7 +41,7 @@ void setup(){
   population = new Population(mutationRate, populationNumber);
 
   // noLoop();
-  frameRate(10);
+  // frameRate(10);
 }
 
 void draw(){

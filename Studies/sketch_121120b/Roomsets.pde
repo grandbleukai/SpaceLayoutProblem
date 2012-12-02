@@ -85,7 +85,7 @@ class Roomsets
 	void fitness(){
 		int outsideValue = allValue - insideValue;
 		int fitnessRev = doubleNumber;
-		fitness = gridWidth*gridHeight + insideValue*10 - allValue - doubleNumber;
+		fitness = gridWidth*gridHeight + insideValue - allValue - doubleNumber*2;
 	}
 
 	float getFitness(){

@@ -32,7 +32,7 @@ class Room
 		roomValue[5] = rv5;
 		roomValue[6] = rv6;
 		// はみ出さないようにmapする
-		xPos = (int)map(gene.x, 0, gridWidth, 0, gridWidth-this.roomValue[type].length+2);
-		yPos = (int)map(gene.y, 0, gridWidth, 0, gridWidth-this.roomValue[type][0].length+2);
+		xPos = (int)map(gene.x, 0, gridWidth, 0, gridWidth-this.roomValue[type].length+1);
+		yPos = (int)map(gene.y, 0, gridWidth, 0, gridWidth-this.roomValue[type][0].length+1);
 	}
 }

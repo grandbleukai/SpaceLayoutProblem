@@ -51,17 +51,35 @@ class DNA
 	// CROSSOVER
 	DNA crossover(DNA partner){
 		PVector[] child = new PVector[genes.length];
-		// Pick a midpoint
-		int crossover = int(random(genes.length));
+
+
+		// 一点交叉
+		// int crossover = int(random(genes.length));
+		// // Take half from one and half from the other
+		// for (int i = 0; i<genes.length; i++){
+		// 	if (i > crossover){
+		// 		child[i] = genes[i];
+		// 	}
+		// 	else {
+		// 		child[i] = partner.genes[i];
+		// 	}
+		// }
+
+
+		// 二点交叉
+		int crossover1 = int(random(genes.length));
+		int crossover2 = int(random(crossover1,genes.length));
 		// Take half from one and half from the other
 		for (int i = 0; i<genes.length; i++){
-			if (i > crossover){
+			if (crossover2> i && i > crossover1){
 				child[i] = genes[i];
 			}
 			else {
 				child[i] = partner.genes[i];
 			}
 		}
+
+
 		DNA newgenes = new DNA(child);
 		return newgenes;
 	}
