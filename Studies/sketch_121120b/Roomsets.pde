@@ -38,7 +38,7 @@ class Roomsets
 	}
 
 	void setGridValue(){
-		int[][] gridValue = grid.gridValue;
+		int[][][] gridValue = grid.gridValue;
 
 		//　最初に定位置の室を配置する
 		grid.setInitialValue(initX,initY,initW,initH);
@@ -50,7 +50,8 @@ class Roomsets
 				for (int j = 0; j<rooms[k].roomValue[rooms[k].type][i].length; j++){
 					int xi = i+rooms[k].xPos;
 					int yj = j+rooms[k].yPos;
-					gridValue[xi][yj] += rooms[k].roomValue[rooms[k].type][i][j];
+					gridValue[xi][yj][0] += rooms[k].roomValue[rooms[k].type][i][j];
+					gridValue[xi][yj][1] = rooms[k].type;
 					allValue += rooms[k].roomValue[rooms[k].type][i][j];
 				}
 			}
@@ -59,13 +60,13 @@ class Roomsets
 		insideValue = 0;
 		for (int i = 0; i<gridWidth; i++){
 			for (int j = 0; j<gridHeight; j++){
-				insideValue += gridValue[i][j];
+				insideValue += gridValue[i][j][0];
 			}
 		}
 		for (int i = 0; i<extraGridWidth; i++){
 			for (int j = 0; j<extraGridHeight; j++){
-				if (gridValue[i][j] >= 2){
-					doubleNumber += gridValue[i][j] -1;
+				if (gridValue[i][j][0] >= 2){
+					doubleNumber += gridValue[i][j][0] -1;
 				}
 			}
 		}
@@ -88,7 +89,7 @@ class Roomsets
 		int outlineValue = 0;
 		for (int i = 0; i<gridWidth; i++){
 			for (int j = 0; j<gridHeight; j++){
-				outlineValue += grid.gridValue[i][0] + grid.gridValue[i][gridHeight-1] + grid.gridValue[0][j] + grid.gridValue[gridWidth-1][j];
+				outlineValue += grid.gridValue[i][0][0] + grid.gridValue[i][gridHeight-1][0] + grid.gridValue[0][j][0] + grid.gridValue[gridWidth-1][j][0];
 			}
 		}
 		fitness = gridWidth*gridHeight + insideValue - allValue - doubleNumber*2 + outlineValue;

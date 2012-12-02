@@ -2,7 +2,7 @@ class Grid
 {
 	int unitSize;
 	int xTop,yTop;
-	int[][] gridValue;
+	int[][][] gridValue; //[x][y][value,color]
 
 	//--------------------------------------
 	//  CONSTRUCTOR
@@ -12,19 +12,19 @@ class Grid
 		unitSize = s;
 		xTop = x;
 		yTop = y;
-    gridValue = new int[extraGridWidth][extraGridHeight];
+    gridValue = new int[extraGridWidth][extraGridHeight][2];
     for (int i = 0; i<extraGridWidth; i++){
       for (int j = 0; j<extraGridHeight; j++){
-        gridValue[i][j] = 0;
+        gridValue[i][j][0] = 0;
       }
     }
   }
 
   Grid (){
-    gridValue = new int[extraGridWidth][extraGridHeight];
+    gridValue = new int[extraGridWidth][extraGridHeight][2];
     for (int i = 0; i<extraGridWidth; i++){
       for (int j = 0; j<extraGridHeight; j++){
-        gridValue[i][j] = 0;
+        gridValue[i][j][0] = 0;
       }
     }
   }
@@ -32,7 +32,7 @@ class Grid
   void setInitialValue(int x, int y, int w, int h) {
     for (int i = x; i<x+w; i++){
       for (int j = y; j<y+h; j++){
-        gridValue[i][j] = 1;
+        gridValue[i][j][0] = 1;
       }
     }
   }
@@ -44,20 +44,36 @@ class Grid
   }
 
   void render(){
-    for (int s = 0; s<gridWidth; s++){
-      for (int t = 0; t<gridHeight; t++){
-        noStroke();
-        stroke(240);
-        fill(255-50*gridValue[s][t]);
-        rect(xTop+unitSize*s, yTop+unitSize*t, unitSize, unitSize);
-      }
-    }
-    for (int i = 0; i<gridWidth; i++){
+     for (int i = 0; i<gridWidth; i++){
       for (int j = 0; j<gridHeight; j++){
-        noFill();
+        fill(225);
         stroke(0);
         rect(xTop+unitSize*i, yTop+unitSize*j, unitSize, unitSize);
       }
     }
+    for (int s = 0; s<gridWidth; s++){
+      for (int t = 0; t<gridHeight; t++){
+        noStroke();
+        stroke(240);
+        // fill(255-50*gridValue[s][t][0]);
+        if (gridValue[s][t][1]==6){
+          fill(225,0,0);
+          if (gridValue[s][t][0]>1){
+            fill(255-50*gridValue[s][t][0]);
+          }
+        }
+        else if (gridValue[s][t][1]==5) {
+          fill(0,225,0);
+          if (gridValue[s][t][0]>1){
+            fill(255-50*gridValue[s][t][0]);
+          }
+        }
+        else {
+          fill(255);
+        }
+        rect(xTop+unitSize*s, yTop+unitSize*t, unitSize, unitSize);
+      }
+    }
+
   }
 }
